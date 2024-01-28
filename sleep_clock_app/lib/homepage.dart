@@ -24,14 +24,10 @@ class _MyHomePageState extends State<HomePage> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextButton(
-                  onPressed: () {},
-                  child: const Column(
-                    children: [
-                      FlutterLogo(),
-                      Text("Sleep Clock"),
-                    ],
-                  ))
+              buildNewMenu('Clock', 'assets/clock_icon.png'),
+              buildNewMenu('Alarm', 'assets/alarm_icon.png'),
+              buildNewMenu('Timer', 'assets/timer_icon.png'),
+              buildNewMenu('Stopwatch', 'assets/stopwatch_icon.png'),
             ],
           ),
           const VerticalDivider(
@@ -45,65 +41,109 @@ class _MyHomePageState extends State<HomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Clock",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 32,
-                  ),
-                  Text(
-                    formattedTime,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 64,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    formattedDate,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  ClockView(),
-                  const Text(
-                    "Time Zone",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  Row(
-                    children: <Widget>[
-                      const Icon(
-                        Icons.language,
+                  const Flexible(
+                    flex: 1,
+                    fit: FlexFit.tight,
+                    child: Text(
+                      "Clock",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
                         color: Colors.white,
+                        fontSize: 24,
                       ),
-                      const SizedBox(width: 16),
-                      Text(
-                        "UTC$offsetSign$timezoneString",
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
+                    ),
+                  ),
+                  Flexible(
+                    flex: 2,
+                    fit: FlexFit.tight,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          formattedTime,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 64,
+                          ),
                         ),
-                      )
-                    ],
-                  )
+                        Text(
+                          formattedDate,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Flexible(
+                      flex: 5,
+                      fit: FlexFit.tight,
+                      child: Align(
+                          alignment: Alignment.center,
+                          child: ClockView(
+                            size: MediaQuery.of(context).size.height / 4,
+                          ))),
+                  Flexible(
+                    flex: 2,
+                    fit: FlexFit.tight,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "Time Zone",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Row(
+                          children: <Widget>[
+                            const Icon(
+                              Icons.language,
+                              color: Colors.white,
+                            ),
+                            const SizedBox(width: 16),
+                            Text(
+                              "UTC$offsetSign$timezoneString",
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                              ),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
         ],
       ),
+    );
+  }
+
+  Padding buildNewMenu(String title, String image) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: (16.0)),
+      child: TextButton(
+          onPressed: () {},
+          child: Column(
+            children: [
+              Image.asset(
+                image,
+                scale: 1.5,
+              ),
+              Text(
+                title,
+                style: TextStyle(color: Colors.white, fontSize: 14),
+              ),
+            ],
+          )),
     );
   }
 }
