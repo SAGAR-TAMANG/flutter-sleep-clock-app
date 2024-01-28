@@ -127,23 +127,28 @@ class _MyHomePageState extends State<HomePage> {
     );
   }
 
-  Padding buildNewMenu(String title, String image) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: (16.0)),
-      child: TextButton(
-          onPressed: () {},
-          child: Column(
-            children: [
-              Image.asset(
-                image,
-                scale: 1.5,
-              ),
-              Text(
-                title,
-                style: TextStyle(color: Colors.white, fontSize: 14),
-              ),
-            ],
-          )),
-    );
+  Widget buildNewMenu(String title, String image) {
+    return TextButton(
+        
+        style: TextButton.styleFrom(
+          padding: EdgeInsets.symmetric(vertical: (16.0)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          backgroundColor: title == 'Clock' ? Color.fromARGB(255, 35, 53, 145) : Colors.transparent,
+        ),
+        onPressed: () {},
+        child: Column(
+          children: [
+            Image.asset(
+              image,
+              scale: 1.5,
+            ),
+            Text(
+              title,
+              style: TextStyle(color: Colors.white, fontSize: 14),
+            ),
+          ],
+        ));
   }
 }
